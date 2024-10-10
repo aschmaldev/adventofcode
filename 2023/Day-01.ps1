@@ -27,44 +27,54 @@ foreach($line in $data) {
 $total = $collectedValues | ForEach-Object { [int]$_ }
 ($total | Measure-Object -Sum).Sum
 
+
 # part two
-
-# foreach($line in $data) {
-
-#     $foundDigits = @()
-
-#     foreach($digit in $digits) {
-        
-#         if ($line.Contains($digit)) {
-#            $foundDigits += $digit
-#         }
-#     }
-#     $foundDigits
-#     "----------------"
-# }
-
-foreach($line in $data) {
-
-    $foundDigits = @()
-    $charLoop = ""
-
-    foreach($char in $line.ToCharArray()) {
-
-        $charLoop += $char
-        $charLoop
-
-        foreach($digit in $digits) {
-
-            if ($digit -eq $charLoop) {
-                $foundDigits += $charLoop
-                # $charLoop = $charLoop.Remove(0,1)
-            }
-
-        }
-        # $charLoop
-
-    }
-    # $foundDigits
-    "----------------"
+$digitMap = @{
+    "one" = "1"
+    "two" = "2"
+    "three" = "3"
+    "four" = "4"
+    "five" = "5"
+    "six" = "6"
+    "seven" = "7"
+    "eight" = "8"
+    "nine" = "9"
+    "zero" = "0"
 }
 
+$collectedValues = @()
+
+foreach($line in $data) {
+    $foundDigits = @()
+
+    $chars = $line.ToCharArray()
+
+    for ($i = 0; $i -lt $chars.Length; $i++) {
+
+        $charLoop = ""
+
+        for ($j = $i; $j -lt $chars.Length; $j++) {
+            $charLoop += $chars[$j]
+            foreach($digit in $digits) {
+
+                if ($digit -eq $charLoop) {
+                    $foundDigits += $charLoop
+                }     
+            }
+        }
+    }
+    for ($i = 0; $i -lt $foundDigits.Length; $i++) {
+        if ($digitMap.ContainsKey($foundDigits[$i])) {
+            $foundDigits[$i] = $digitMap[$foundDigits[$i]]
+        }
+    }
+    $foundDigits
+    Write-Host "==============="
+    if ($foundDigits.Length -eq 1) {
+        $foundDigits += $foundDigits[0]
+    }
+    $collectedValues += ($foundDigits[0] + $foundDigits[-1])
+}
+
+$total = $collectedValues | ForEach-Object { [int]$_ }
+($total | Measure-Object -Sum).Sum
