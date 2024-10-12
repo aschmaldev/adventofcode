@@ -68,8 +68,6 @@ foreach($line in $data) {
             $foundDigits[$i] = $digitMap[$foundDigits[$i]]
         }
     }
-    $foundDigits
-    Write-Host "==============="
     if ($foundDigits.Length -eq 1) {
         $foundDigits += $foundDigits[0]
     }
