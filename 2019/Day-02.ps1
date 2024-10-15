@@ -4,38 +4,38 @@
 # part one
 # ==========================================================================
 
-# $data = Get-Content .\2019\input\day02.txt
-# $data = $data.Split(",") | ForEach-Object { [int]$_ }
+$data = Get-Content .\2019\input\day02.txt
+$data = $data.Split(",") | ForEach-Object { [int]$_ }
 
-# $data[1] = 12
-# $data[2] = 2
+$data[1] = 12
+$data[2] = 2
 
-# $i = 0
+$i = 0
 
-# while ($true) {
+while ($true) {
 
-#     $position1 = $data[$i]
-#     $position2 = $data[$i+1]
-#     $position3 = $data[$i+2]
-#     $position4 = $data[$i+3]
+    $position1 = $data[$i]
+    $position2 = $data[$i+1]
+    $position3 = $data[$i+2]
+    $position4 = $data[$i+3]
 
-#     if ($position1 -eq 1) {
-#         $output = $data[$position2] + $data[$position3]
-#         $data[$position4] = $output
+    if ($position1 -eq 1) {
+        $output = $data[$position2] + $data[$position3]
+        $data[$position4] = $output
 
-#     }elseif ($position1 -eq 2) {
-#         $output = $data[$position2] * $data[$position3]
-#         $data[$position4] = $output
+    }elseif ($position1 -eq 2) {
+        $output = $data[$position2] * $data[$position3]
+        $data[$position4] = $output
 
-#     }elseif ($position1 -eq 99) {
+    }elseif ($position1 -eq 99) {
 
-#         break
-#     }
+        break
+    }
 
-#     $i += 4
-# }
+    $i += 4
+}
 
-# $data[0]
+$data[0]
 
 
 # ==========================================================================
